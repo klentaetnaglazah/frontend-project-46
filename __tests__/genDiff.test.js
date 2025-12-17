@@ -54,3 +54,26 @@ describe('genDiff', () => {
     fs.unlinkSync(unsupportedPath)
   })
 })
+
+describe('YAML support for genDiff', () => {
+  const expectedDiff = readFixture('expected.yml').trim()
+
+  test('should correctly compare two flat YAML files', () => {
+    const filepath1 = getFixturePath('file1.yml')
+    const filepath2 = getFixturePath('file2.yml')
+    const result = genDiff(filepath1, filepath2)
+    expect(result).toBe(expectedDiff)
+  })
+
+  test('should detect file format based on .yml extension', () => {
+    const filepath1 = getFixturePath('file1.yml')
+    const filepath2 = getFixturePath('file2.yml')
+    expect(() => genDiff(filepath1, filepath2)).not.toThrow()
+  })
+
+  test('should also support .yaml extension', () => {
+    const filepath1 = getFixturePath('file1.yaml')
+    const filepath2 = getFixturePath('file2.yaml')
+    expect(() => genDiff(filepath1, filepath2)).not.toThrow()
+  })
+})

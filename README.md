@@ -16,3 +16,13 @@ Compares two configuration files and shows a difference.
 
 ```bash
 npm install @hexlet/code
+```
+
+### Example of comparing YAML files
+
+file1.yml:
+```yaml
+host: hexlet.io
+timeout: 50
+proxy: 123.234.53.22
+follow: false
